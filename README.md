@@ -1,6 +1,8 @@
-# SecureEvent-Serverless-RSVP-Platform
+# SecureEvent – Serverless RSVP Platform
 
-SecureEvent is a secure, serverless RSVP platform built on AWS using Lambda, API Gateway, S3, and CloudFront. It demonstrates Linux-based cloud deployment, IAM least-privilege security, protected REST APIs, environment variable management, and CloudWatch monitoring in a real-world serverless architecture.
+SecureEvent is a secure, cloud-native serverless RSVP application built on AWS.
+It demonstrates real-world Linux, Cloud, Database, and Security practices using AWS managed services and RESTful APIs.
+
 ---
 
 ## 🚀 Project Overview
@@ -8,9 +10,9 @@ SecureEvent is a secure, serverless RSVP platform built on AWS using Lambda, API
 SecureEvent allows users to:
 - View available events
 - Submit RSVPs securely
-- Fetch attendee statistics via REST APIs
+- Store and retrieve event and attendee data from a managed database
 
-The project follows a **serverless architecture**, ensuring scalability, reduced operational overhead, and secure cloud communication.
+The project follows a **serverless architecture** with a **managed relational database (Amazon RDS)**, making it suitable for real-world cloud deployments.
 
 ---
 
@@ -19,29 +21,45 @@ The project follows a **serverless architecture**, ensuring scalability, reduced
 - **Frontend:** Static website hosted on Amazon S3 and delivered via CloudFront  
 - **Backend:** AWS Lambda (Node.js)  
 - **API Layer:** Amazon API Gateway  
-- **Database:** DynamoDB / MySQL  
+- **Database:** Amazon RDS (MySQL)  
 - **Monitoring:** Amazon CloudWatch  
+- **OS & Tooling:** Linux, AWS CLI, Sqlectron  
+
+---
+
+## 🗄️ Database Design (Amazon RDS)
+
+- MySQL database hosted on **Amazon RDS**
+- Tables designed with primary and foreign keys
+- Managed and queried using **Sqlectron**
+- Secure access controlled via **VPC Security Groups**
+
+### Tables
+- `events` – stores event details  
+- `rsvps` – stores attendee RSVP information  
 
 ---
 
 ## 🔐 Security Implementation
 
-- IAM roles with **least-privilege access**
-- Secure API access using **API Gateway API keys**
-- Sensitive data managed using **Lambda environment variables**
+- IAM roles with **least-privilege access** for Lambda
+- Secure database access using **VPC security groups**
+- API protection using **API Gateway API keys**
+- Sensitive configuration managed via **Lambda environment variables**
 - Server-side **input validation**
 - Restricted **CORS policies**
-- CloudWatch logging and error monitoring
+- CloudWatch logging and monitoring
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Cloud:** AWS Lambda, API Gateway, S3, CloudFront, IAM, CloudWatch  
+- **Cloud:** AWS Lambda, API Gateway, S3, CloudFront, RDS, IAM, CloudWatch  
 - **Backend:** Node.js  
 - **Frontend:** HTML, CSS, JavaScript  
-- **Database:** DynamoDB / MySQL  
+- **Database:** MySQL (Amazon RDS)  
 - **OS:** Linux  
+- **DB Client:** Sqlectron  
 
 ---
 
@@ -55,6 +73,7 @@ The project follows a **serverless architecture**, ensuring scalability, reduced
 │   └── app.js
 ├── backend/
 │   └── index.js
-├── utils/
+├── database/
+│   └── schema.sql
 ├── package.json
 └── README.md
